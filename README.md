@@ -44,33 +44,7 @@ The 16-bit ALU supports 8 operations:
 
 ---
 
-## 📂 Project Structure
 
-```text
-├── alu_16bit.v                     # RTL design
-├── alu_16bit.sdc                  # Timing constraints
-├── run_genus_dft_alu.tcl          # Genus synthesis + DFT script
-├── run_modus_atpg_alu.tcl         # Modus ATPG script
-│
-├── reports/
-│   ├── pre_dft_area.rpt
-│   ├── pre_dft_power.rpt
-│   ├── pre_dft_timing.rpt
-│   ├── post_dft_area.rpt
-│   ├── post_dft_power.rpt
-│   ├── post_dft_timing.rpt
-│   ├── scan_chains.rpt
-│   └── dft_setup.rpt
-│
-├── results/
-│   ├── test_coverage.rpt
-│   ├── test_structures.rpt
-│   └── verify_structures.rpt
-│
-└── tbdata/                        # Modus generated ATPG database
-```
-
----
 
 ## ⚙️ Tools Used
 
@@ -110,22 +84,60 @@ Using Cadence Modus:
 
 ## 📊 Sample Results
 
-### Pre-DFT Reports
-- Timing
-- Area
-- Power
-- Gate count
+The following synthesis, DFT, and ATPG results were obtained from **Cadence Genus and Modus reports** included in this repository.
 
-### Post-DFT Reports
-- Scan overhead
-- Area increase
-- Timing impact
-- DFT validation
+---
 
-### ATPG Reports
-- Fault coverage
-- Structural verification
-- Pattern quality
+### 🔹 Pre-DFT vs Post-DFT Synthesis Comparison
+
+| Metric | Pre-DFT | Post-DFT | Impact |
+|---|---:|---:|---:|
+| Cell Count | 247 | 253 | +6 |
+| Total Area | 1708.323 | 1813.532 | **+6.16%** |
+| Total Power (W) | 5.68121e-05 | 6.44671e-05 | **+13.47%** |
+| Worst Setup Slack (ps) | 8428 | 8311 | **-117 ps** |
+| Scan Flip-Flops | DFFRHQX1 / DFFRHQX2 | **SDFFRHQX1 = 17** | Scan inserted ✅ |
+
+---
+
+### 🔹 DFT / Scan Chain Results
+
+| Parameter | Result |
+|---|---|
+| DFT Style | Full Scan |
+| Scan Architecture | Muxed Scan |
+| Scan Chains | 1 |
+| Scan FF Type | SDFFRHQX1 |
+| Scan Overhead | 6 extra cells |
+| DFT Rule Check | Passed |
+| Scan Chain Stitching | Successful |
+
+---
+
+### 🔹 ATPG Results (Cadence Modus)
+
+| Parameter | Value |
+|---|---:|
+| Total Static Faults | 2228 |
+| Total Dynamic Faults | 2148 |
+| Detected Faults (1st pattern set) | 159 |
+| Untested Faults | 2069 |
+| Test Coverage | **7.14%** |
+| Adjusted Coverage | **7.14%** |
+| Test Mode | FULLSCAN |
+
+---
+
+### 🔹 Key Observations
+
+- **Area increased by 6.16%** after scan insertion
+- **Power overhead increased by 13.47%**
+- Timing degradation is minimal (**117 ps slack reduction**)
+- Full-scan DFT insertion successfully replaced normal FFs with **scan FFs**
+- Initial ATPG run achieved **7.14% fault coverage**
+- Further pattern optimization can improve coverage significantly
+
+---
 
 ---
 
@@ -144,6 +156,6 @@ This project helped in understanding:
 
 ## 👨‍💻 Author
 **Ashish**  
-B.Tech Electronics / VLSI / Digital Design
+IIITDM Kurnool / B.Tech / Electronics and Communication Engineering / VLSI 
 
 ---
