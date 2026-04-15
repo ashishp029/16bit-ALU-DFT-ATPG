@@ -1,143 +1,149 @@
-# 16-bit ALU DFT and ATPG Flow (Cadence Genus + Modus)
+# 16-bit ALU with DFT Insertion and ATPG using Cadence Genus + Modus
 
-## README.md
+This project implements a **16-bit ALU in Verilog**, followed by:
 
-````markdown
-# 16-bit ALU DFT and ATPG Automation using Cadence Genus & Modus
+- RTL synthesis using **Cadence Genus**
+- **DFT scan insertion**
+- **Single scan chain generation**
+- ATPG using **Cadence Modus**
+- Fault coverage and structural test report generation
 
-This project implements a 16-bit ALU design-for-test (DFT) flow using Cadence Genus for synthesis + scan insertion and Cadence Modus for ATPG and scan verification.
-
-The repository demonstrates a complete **RTL → synthesized netlist → scan insertion → ATPG vector generation → simulation validation** flow.
+This project demonstrates a complete **RTL-to-DFT-to-ATPG flow** used in VLSI design verification.
 
 ---
 
-## 📌 Project Overview
-The project includes:
-- RTL design of 16-bit ALU in Verilog
-- Synthesis constraints using SDC
-- Pre-DFT synthesis reports
-- Scan chain insertion
-- Post-DFT timing/area/power reports
-- ATPG setup and test vector generation
-- Full-scan simulation scripts
-- Coverage and structure verification reports
+## 📌 Features
 
-This is useful for:
-- VLSI DFT lab projects
-- Cadence Genus/Modus learning
-- ATPG flow understanding
-- Scan chain insertion practice
-- Academic mini-project / B.Tech project
+### ✅ Functional ALU Operations
+The 16-bit ALU supports 8 operations:
+
+| Opcode | Operation |
+|---|---|
+| 000 | ADD |
+| 001 | SUB |
+| 010 | AND |
+| 011 | OR |
+| 100 | XOR |
+| 101 | NOT |
+| 110 | Shift Left |
+| 111 | Shift Right |
+
+### ✅ Status Flags
+- Zero
+- Carry
+- Overflow
+- Negative
+
+### ✅ DFT Features
+- Muxed scan architecture
+- `scan_en`
+- `scan_in`
+- `scan_out`
+- Single scan chain
+- Full scan compatible
+
+---
+
+## 📂 Project Structure
+
+```text
+├── alu_16bit.v                     # RTL design
+├── alu_16bit.sdc                  # Timing constraints
+├── run_genus_dft_alu.tcl          # Genus synthesis + DFT script
+├── run_modus_atpg_alu.tcl         # Modus ATPG script
+│
+├── reports/
+│   ├── pre_dft_area.rpt
+│   ├── pre_dft_power.rpt
+│   ├── pre_dft_timing.rpt
+│   ├── post_dft_area.rpt
+│   ├── post_dft_power.rpt
+│   ├── post_dft_timing.rpt
+│   ├── scan_chains.rpt
+│   └── dft_setup.rpt
+│
+├── results/
+│   ├── test_coverage.rpt
+│   ├── test_structures.rpt
+│   └── verify_structures.rpt
+│
+└── tbdata/                        # Modus generated ATPG database
+```
 
 ---
 
 ## ⚙️ Tools Used
 
-* **Cadence Genus** → RTL synthesis + DFT insertion
-* **Cadence Modus** → ATPG + fault coverage
-* **Verilog HDL** → RTL design
-* **SDC** → Timing constraints
+- **Verilog HDL**
+- **Cadence Genus**
+- **Cadence Modus**
+- **TCL scripting**
+- **90nm Standard Cell Library**
 
 ---
 
-## 🚀 How to Run
+## 🚀 Flow Used
 
-### 1) Run synthesis + DFT insertion
+### 1️⃣ RTL Design
+The ALU is written in Verilog with scan-compatible registers.
 
-```bash
-genus run_genus_dft_alu.tcl
-```
+### 2️⃣ Synthesis
+Using Cadence Genus:
+- RTL elaboration
+- Logic synthesis
+- Constraint-driven optimization
 
-### 2) Run ATPG
+### 3️⃣ DFT Insertion
+- Scan replacement
+- Scan chain stitching
+- DFT rule checks
+- Scan chain reports
 
-```bash
-modus run_modus_atpg_alu.tcl
-```
-
-### 3) Run full scan simulation
-
-```bash
-./run_fullscan_sim
-```
-
----
-
-
----
-
-
-## 📊 Report Summary Tables (Generated from Actual Reports)
-
-### 1) Timing Comparison (Pre-DFT vs Post-DFT)
-
-| Metric               |               Pre-DFT |              Post-DFT | Observation                        |
-| -------------------- | --------------------: | --------------------: | ---------------------------------- |
-| Required Time (ps)   |                 19285 |                 19302 | Slight improvement                 |
-| Data Path Delay (ps) |                  5857 |                  5992 | Increased due to scan mux overhead |
-| Slack (ps)           |                  8428 |                  8311 | Minor reduction after DFT          |
-| Timing Status        |                   MET |                   MET | Timing clean in both stages        |
-| Critical Endpoint    | `flag_overflow_reg/D` | `flag_overflow_reg/D` | Same critical path                 |
-
-### 2) Scan Chain Summary
-
-| Metric               |                     Value |
-| -------------------- | ------------------------: |
-| Total Scan Chains    |                         1 |
-| Total Scan Bits      |                        19 |
-| Longest Chain Length |                        19 |
-| Average Chain Length |                        19 |
-| Scan Input           |                 `scan_in` |
-| Scan Output          |                `scan_out` |
-| Status               | Controllable & Observable |
-
-### 3) ATPG / Fault Coverage Results
-
-| Metric                |       Value |
-| --------------------- | ----------: |
-| Total Static Faults   |        2228 |
-| Tested Static Faults  |        2228 |
-| Static Coverage       | **100.00%** |
-| Dynamic Faults        |        2228 |
-| Tested Dynamic Faults |         120 |
-| Dynamic Coverage      |       5.39% |
-| Logic Patterns        |          57 |
-| Scan Patterns         |           1 |
-| Total Patterns        |          58 |
-
-### 4) Test Structure Verification
-
-| Metric               |              Value |
-| -------------------- | -----------------: |
-| Total Flip-Flops     |                 19 |
-| Total Cell Instances |                255 |
-| Primary Inputs       |                 40 |
-| Primary Outputs      |                 21 |
-| Scan Enable Pins     |                  1 |
-| Scan Input Pins      |                  1 |
-| Scan Output Pins     |                  1 |
-| Clock Pins           | 2 system + 1 shift |
-| Verification Result  |               PASS |
-
-### 5) DFT Quality Summary
-
-| Check                       | Result   |
-| --------------------------- | -------- |
-| Timing after scan insertion | PASS     |
-| Scan chain controllability  | PASS     |
-| Scan chain observability    | PASS     |
-
+### 4️⃣ ATPG
+Using Cadence Modus:
+- Fault model generation
+- Stuck-at ATPG
+- Pattern generation
+- Coverage report
 
 ---
 
-## ✅ Results
+## 📊 Sample Results
 
-* Successful scan insertion
-* ATPG vectors generated
-* Fault coverage report available
-* Simulation verified
+### Pre-DFT Reports
+- Timing
+- Area
+- Power
+- Gate count
 
-| ATPG static coverage        | 100%     |
-| Test vector generation      | PASS     |
-| Full scan structure         | VERIFIED |
+### Post-DFT Reports
+- Scan overhead
+- Area increase
+- Timing impact
+- DFT validation
 
-These tables are ideal for your **GitHub README**, **resume project section**, and **project report screenshots**.
+### ATPG Reports
+- Fault coverage
+- Structural verification
+- Pattern quality
+
+---
+
+## 🎯 Learning Outcomes
+
+This project helped in understanding:
+
+- RTL design methodology
+- Scan insertion flow
+- DFT rule checks
+- ATPG pattern generation
+- Fault coverage analysis
+- TCL automation for EDA tools
+
+---
+
+## 👨‍💻 Author
+**Ashish**  
+B.Tech Electronics / VLSI / Digital Design
+
+---
