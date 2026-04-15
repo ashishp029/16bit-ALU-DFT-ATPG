@@ -155,7 +155,7 @@ This project helped in understanding:
 ---
 
 ## 👨‍💻 Author
-**Ashish**  
+**Ashish Prajapati**  
 IIITDM Kurnool / B.Tech / Electronics and Communication Engineering / VLSI 
 
 ---
