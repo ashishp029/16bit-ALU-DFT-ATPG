@@ -5,7 +5,7 @@
 ````markdown
 # 16-bit ALU DFT and ATPG Automation using Cadence Genus & Modus
 
-This project implements a **16-bit ALU design-for-test (DFT) flow** using **Cadence Genus** for synthesis + scan insertion and **Cadence Modus** for ATPG and scan verification.
+This project implements a 16-bit ALU design-for-test (DFT) flow using Cadence Genus for synthesis + scan insertion and Cadence Modus for ATPG and scan verification.
 
 The repository demonstrates a complete **RTL → synthesized netlist → scan insertion → ATPG vector generation → simulation validation** flow.
 
@@ -13,7 +13,7 @@ The repository demonstrates a complete **RTL → synthesized netlist → scan in
 
 ## 📌 Project Overview
 The project includes:
-- RTL design of **16-bit ALU** in Verilog
+- RTL design of 16-bit ALU in Verilog
 - Synthesis constraints using SDC
 - Pre-DFT synthesis reports
 - Scan chain insertion
@@ -31,29 +31,6 @@ This is useful for:
 
 ---
 
-## 📂 Repository Structure
-```text
-.
-├── alu_16bit.v
-├── alu_16bit.sdc
-├── run_genus_dft_alu.tcl
-├── run_modus_atpg_alu.tcl
-├── runmodus.atpg.tcl
-├── run_fullscan_sim
-├── run_fullscan_sim_sdf
-├── alu_16bit_pre_dft.v
-├── alu_16bit_post_dft.v
-├── alu_16bit.test_netlist.v
-├── pre_dft_*.rpt
-├── post_dft_*.rpt
-├── dft_rules_check.rpt
-├── scan_chains.rpt
-├── results/
-└── README.md
-````
-
----
-
 ## ⚙️ Tools Used
 
 * **Cadence Genus** → RTL synthesis + DFT insertion
@@ -68,13 +45,13 @@ This is useful for:
 ### 1) Run synthesis + DFT insertion
 
 ```bash
-genus -f run_genus_dft_alu.tcl
+genus run_genus_dft_alu.tcl
 ```
 
 ### 2) Run ATPG
 
 ```bash
-modus -f run_modus_atpg_alu.tcl
+modus run_modus_atpg_alu.tcl
 ```
 
 ### 3) Run full scan simulation
@@ -85,120 +62,9 @@ modus -f run_modus_atpg_alu.tcl
 
 ---
 
-## 📊 Important Reports
-
-* `pre_dft_timing.rpt` → Timing before scan insertion
-* `post_dft_timing.rpt` → Timing after scan insertion
-* `scan_chains.rpt` → Scan chain details
-* `test_coverage.rpt` → ATPG fault coverage
-* `verify_structures.rpt` → Test structure validation
 
 ---
 
-## ✅ Results
-
-* Successful scan insertion
-* ATPG vectors generated
-* Fault coverage report available
-* Simulation verified
-
----
-
-## 👨‍💻 Author
-
-**Ashish**
-B.Tech VLSI / Digital Design Project
-
-````
-
----
-
-# ✅ Files You SHOULD Upload to GitHub
-These are the **important source + reproducible result files**:
-
-### Core source files
-- `alu_16bit.v`
-- `alu_16bit.sdc`
-- `run_genus_dft_alu.tcl`
-- `run_modus_atpg_alu.tcl`
-- `runmodus.atpg.tcl`
-- `run_fullscan_sim`
-- `run_fullscan_sim_sdf`
-
-### Important generated netlists
-- `alu_16bit_pre_dft.v`
-- `alu_16bit_post_dft.v`
-- `alu_16bit.test_netlist.v`
-
-### Useful reports
-- `pre_dft_*.rpt`
-- `post_dft_*.rpt`
-- `dft_rules_check.rpt`
-- `scan_chains.rpt`
-- `results/test_coverage.rpt`
-- `results/verify_structures.rpt`
-- `results/test_structures.rpt`
-
-### Optional academic proof files
-- `alu_16bit.scandef`
-- `alu_16bit_post_dft.sdf`
-- `alu_16bit_post_dft.sdc`
-
----
-
-# ❌ Files/Folders You should NOT Upload
-These are tool-generated temporary/cache files:
-
-- `tbdata/`
-- `testresults/`
-- `fv/`
-- `*.log`
-- `*.cmd`
-- `.rs_*`
-- `*.tstamp`
-- lock files
-- Cadence internal database files
-
-These make repo **huge and messy**.
-
----
-
-# ✅ Recommended .gitignore
-```gitignore
-# Cadence temporary data
-tbdata/
-testresults/
-fv/
-results/*.tmp
-
-# Logs
-*.log
-*.cmd
-*.tstamp
-.rs_*
-
-# Generated databases
-*.db
-*.dat
-*.lock
-````
-
----
-
-# ⭐ Best GitHub Upload Strategy
-
-Upload only:
-
-1. RTL
-2. TCL scripts
-3. SDC
-4. Important reports
-5. Final post-DFT netlist
-6. README.md
-
-This makes your GitHub look **professional and recruiter-friendly**.
-
----
 
 ## 📊 Report Summary Tables (Generated from Actual Reports)
 
@@ -259,6 +125,17 @@ This makes your GitHub look **professional and recruiter-friendly**.
 | Timing after scan insertion | PASS     |
 | Scan chain controllability  | PASS     |
 | Scan chain observability    | PASS     |
+
+
+---
+
+## ✅ Results
+
+* Successful scan insertion
+* ATPG vectors generated
+* Fault coverage report available
+* Simulation verified
+
 | ATPG static coverage        | 100%     |
 | Test vector generation      | PASS     |
 | Full scan structure         | VERIFIED |
