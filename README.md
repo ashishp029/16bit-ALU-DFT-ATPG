@@ -1,4 +1,4 @@
-# 16-bit ALU with Registers | Scan Chain, DFT and ATPG using Cadence Genus + Modus
+# 16-bit ALU with DFT Insertion and ATPG using Cadence Genus + Modus
 
 This project implements a **16-bit ALU in Verilog**, followed by:
 
