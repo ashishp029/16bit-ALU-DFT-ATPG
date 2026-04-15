@@ -5,7 +5,7 @@
 ````markdown
 # 16-bit ALU DFT and ATPG Automation using Cadence Genus & Modus
 
-This project implements a **16-bit ALU design-for-test (DFT) flow** using **Cadence Genus** for synthesis + scan insertion and **Cadence Modus** for ATPG and scan verification.
+This project implements a *16-bit ALU design-for-test (DFT) flow* using **Cadence Genus** for synthesis + scan insertion and **Cadence Modus** for ATPG and scan verification.
 
 The repository demonstrates a complete **RTL → synthesized netlist → scan insertion → ATPG vector generation → simulation validation** flow.
 
