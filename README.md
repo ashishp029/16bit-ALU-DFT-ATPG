@@ -82,6 +82,28 @@ Using Cadence Modus:
 
 ---
 
+---
+
+## 🖼️ Gate-Level Schematic After DFT Insertion
+
+The following schematic shows the **gate-level implementation of the 16-bit ALU after synthesis and DFT scan insertion** in **Cadence Genus**.
+
+It includes:
+
+- combinational ALU logic
+- scan-enabled flip-flops
+- scan multiplexers
+- register connections
+- optimized synthesized standard cells
+
+This validates the successful **RTL-to-gate conversion and scan chain insertion flow**.
+
+![Post Synthesis Schematic](images/post_synthesis_schematic.png)
+
+**Figure:** Post-synthesis schematic of 16-bit ALU with DFT scan structure.
+
+---
+
 ## 📊 Sample Results
 
 The following synthesis, DFT, and ATPG results were obtained from **Cadence Genus and Modus reports** included in this repository.
