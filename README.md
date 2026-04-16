@@ -98,7 +98,7 @@ It includes:
 
 This validates the successful **RTL-to-gate conversion and scan chain insertion flow**.
 
-![Post Synthesis Schematic](images/post_synthesis_schematic.jpeg)
+![Post Synthesis Schematic](images/Post Synthesis Schematic.jpeg)
 
 **Figure:** Post-synthesis schematic of 16-bit ALU with DFT scan structure.
 
